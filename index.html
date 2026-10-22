@@ -3,77 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Dashboard: Uso de IA vs. Compreensão</title>
-  <!-- Chart.js para os gráficos interativos -->
+  <title>Painel de Análise: IA na Educação</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Ligação ao ficheiro CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="window-container">
-    <!-- Cabeçalho com o Filtro Interativo -->
-    <div class="window-header">
-      <div class="window-dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+  <div class="dashboard-container">
+    <!-- Cabeçalho Principal -->
+    <header class="main-header">
+      <div>
+        <h1>Análise de Impacto: Uso de IA e Aprendizado</h1>
+        <p>Pesquisa sobre hábitos de estudo e retenção de conteúdo escolar</p>
       </div>
-      <div class="window-title">Meu Dashboard: Uso de IA vs. Compreensão</div>
-      <div class="filter-container">
-        <label for="useFilter">Filtro:</label>
-        <select id="useFilter" onchange="updateDashboard()">
-          <option value="todos">Todos os Alunos (20)</option>
-          <option value="copia_alteracoes">Copio, mas faço alterações (7)</option>
-          <option value="escrevo_proprias">Uso como base e reescrevo (7)</option>
-          <option value="apenas_duvidas">Apenas para tirar dúvidas (3)</option>
-          <option value="copia_sem_alteracoes">Copio sem alterações (1)</option>
-        </select>
+    </header>
+
+    <!-- Cards de Indicadores (KPIs) -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-title">Total de Alunos</span>
+        <span class="kpi-value">20</span>
       </div>
-    </div>
-
-    <div class="dashboard-body">
-      <!-- Grid dos Gráficos -->
-      <div class="charts-grid">
-        <div class="chart-card">
-          <h3>Gráfico 1: Como a turma utiliza a IA nos trabalhos?</h3>
-          <div class="canvas-box">
-            <canvas id="chartPie"></canvas>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <h3>Gráfico 2: Nível de Compreensão do Conteúdo</h3>
-          <div class="canvas-box">
-            <canvas id="chartBar"></canvas>
-          </div>
-        </div>
+      <div class="kpi-card">
+        <span class="kpi-title">Utilizam IA</span>
+        <span class="kpi-value">90%</span>
       </div>
+      <div class="kpi-card warning">
+        <span class="kpi-title">Domínio Total do Tema</span>
+        <span class="kpi-value">5%</span>
+      </div>
+    </section>
 
-      <!-- Etapas Explicativas -->
-      <div class="steps-container">
-        <div class="step-box">
-          <span class="step-number">1</span> <strong>Gráfico de Pizza:</strong> Mostra a distribuição dos hábitos de uso da Inteligência Artificial.
-        </div>
-        <div class="step-box">
-          <span class="step-number">2</span> <strong>Gráfico de Barras:</strong> Exibe a percepção de aprendizado e retenção do conteúdo.
-        </div>
-        <div class="step-box">
-          <span class="step-number">3</span> <strong>Filtro Interativo:</strong> Permite isolar um perfil de uso e ver o impacto na compreensão.
+    <!-- Filtro por Botões -->
+    <section class="filter-section">
+      <span class="filter-label">Filtrar por Perfil de Uso:</span>
+      <div class="filter-buttons">
+        <button class="btn-filter active" onclick="setFilter('todos', this)">Todos</button>
+        <button class="btn-filter" onclick="setFilter('copia_alteracoes', this)">Copiam c/ alterações</button>
+        <button class="btn-filter" onclick="setFilter('escrevo_proprias', this)">Reescrevem autoralmente</button>
+        <button class="btn-filter" onclick="setFilter('apenas_duvidas', this)">Apenas dúvidas</button>
+        <button class="btn-filter" onclick="setFilter('copia_sem_alteracoes', this)">Cópia direta</button>
+      </div>
+    </section>
+
+    <!-- Gráficos -->
+    <section class="charts-grid">
+      <div class="chart-card">
+        <h2>Distribuição do Uso de IA</h2>
+        <div class="canvas-box">
+          <canvas id="chartDonut"></canvas>
         </div>
       </div>
 
-      <!-- Confirmação de Hipótese -->
-      <div class="hypothesis-card">
-        <h4>⚡ Confirmação de Hipótese Realizada</h4>
-        <p id="hypothesisText">
-          Selecione uma opção no filtro no topo para analisar como a mudança na forma de uso da IA afeta o aprendizado dos estudantes.
-        </p>
+      <div class="chart-card">
+        <h2>Percepção de Compreensão</h2>
+        <div class="canvas-box">
+          <canvas id="chartBar"></canvas>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Painel de Conclusão / Validação -->
+    <section class="insight-box">
+      <h3>💡 Insights da Pesquisa</h3>
+      <p id="insightText">
+        Selecione um perfil de uso acima para visualizar o impacto no nível de compreensão da matéria.
+      </p>
+    </section>
   </div>
 
-  <!-- Ligação ao ficheiro JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>

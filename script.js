@@ -1,4 +1,3 @@
-// Dados dos 20 alunos extraídos da planilha
 const studentData = [
   { uso: 'copia_alteracoes', compreensao: 'Dificuldade para explicar' },
   { uso: 'copia_sem_alteracoes', compreensao: 'Dificuldade para explicar' },
@@ -22,36 +21,38 @@ const studentData = [
   { uso: 'escrevo_proprias', compreensao: 'Não se preocupa' }
 ];
 
-let pieChart, barChart;
+let donutChart, barChart;
 
 window.onload = function() {
-  // Gráfico de Pizza
-  const ctxPie = document.getElementById('chartPie').getContext('2d');
-  pieChart = new Chart(ctxPie, {
-    type: 'pie',
+  // Gráfico de Rosca (Donut)
+  const ctxDonut = document.getElementById('chartDonut').getContext('2d');
+  donutChart = new Chart(ctxDonut, {
+    type: 'doughnut',
     data: {
       labels: [
         'Copio c/ alterações',
-        'Uso como base / Reescrevo',
+        'Reescrevo autoralmente',
         'Apenas p/ dúvidas',
-        'Não utilizo IA',
-        'Copio s/ alterações'
+        'Não utilizo',
+        'Cópia direta'
       ],
       datasets: [{
         data: [7, 7, 3, 2, 1],
-        backgroundColor: ['#42a5f5', '#66bb6a', '#ffa726', '#bdbdbd', '#ef5350']
+        backgroundColor: ['#4318ff', '#6ad2ff', '#ffb800', '#e0e5f2', '#ff5630'],
+        borderWidth: 0
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
-      }
+        legend: { position: 'bottom' }
+      },
+      cutout: '65%'
     }
   });
 
-  // Gráfico de Barras
+  // Gráfico de Barras Horizontais
   const ctxBar = document.getElementById('chartBar').getContext('2d');
   barChart = new Chart(ctxBar, {
     type: 'bar',
@@ -64,29 +65,33 @@ window.onload = function() {
         'Não se Preocupa'
       ],
       datasets: [{
-        label: 'Nº de Alunos',
+        label: 'Alunos',
         data: [1, 8, 4, 3, 2],
-        backgroundColor: '#5c6bc0'
+        backgroundColor: '#4318ff',
+        borderRadius: 8
       }]
     },
     options: {
+      indexAxis: 'y', // Define o gráfico como horizontal
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+        x: { beginAtZero: true, ticks: { stepSize: 1 } }
       },
-      plugins: {
-        legend: { display: false }
-      }
+      plugins: { legend: { display: false } }
     }
   });
 
-  updateDashboard();
+  updateAnalysis('todos');
 };
 
-function updateDashboard() {
-  const selectedFilter = document.getElementById('useFilter').value;
-  
+function setFilter(filterValue, element) {
+  document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+  element.classList.add('active');
+  updateAnalysis(filterValue);
+}
+
+function updateAnalysis(selectedFilter) {
   let filtered = studentData;
   if (selectedFilter !== 'todos') {
     filtered = studentData.filter(d => d.uso === selectedFilter);
@@ -115,14 +120,14 @@ function updateDashboard() {
   ];
   barChart.update();
 
-  const textElem = document.getElementById('hypothesisText');
+  const insightElem = document.getElementById('insightText');
   if (selectedFilter === 'todos') {
-    textElem.innerHTML = "<b>Análise Geral:</b> Apenas 1 aluno entre os 20 domina perfeitamente o assunto (5%). A maior parte da turma compreende apenas parcialmente.";
+    insightElem.innerHTML = "<b>Visão Geral:</b> Dos 20 alunos, 90% utilizam a IA de alguma forma[cite: 1]. Porém, apenas 1 aluno (5%) afirma ter compreensão total da matéria[cite: 1].";
   } else if (selectedFilter === 'copia_alteracoes' || selectedFilter === 'copia_sem_alteracoes') {
-    textElem.innerHTML = "<b>Hipótese Confirmada!</b> Ao filtrar por alunos que apenas copiam as respostas (com ou sem alterações), <b>nenhum aluno alcança o nível 'Compreendo Muito Bem'</b>, demonstrando baixa retenção autônoma do conteúdo.";
+    insightElem.innerHTML = "<b>Resultado Chave:</b> Alunos que apenas copiam as respostas (com ou sem alterações) não atingem o nível máximo de compreensão[cite: 1]. A maioria fica retida em apenas entender partes do conteúdo[cite: 1].";
   } else if (selectedFilter === 'escrevo_proprias') {
-    textElem.innerHTML = "<b>Uso Ativo:</b> Alunos que utilizam a IA como base e reescrevem com as próprias palavras apresentam a maior taxa de retenção e compreensão profunda do conteúdo.";
+    insightElem.innerHTML = "<b>Melhor Prática:</b> O grupo que usa a IA como apoio e reescreve o conteúdo com as próprias palavras é o único onde há relatos de domínio completo do assunto[cite: 1].";
   } else {
-    textElem.innerHTML = "<b>Uso Específico:</b> Alunos que usam a IA apenas para tirar dúvidas demonstram compreensão parcial, sem abandono do esforço de estudo.";
+    insightElem.innerHTML = "<b>Uso Pontual:</b> O uso da IA focado em sanar dúvidas pontuais demonstra uma retenção intermediária, sem prejuízo direto à tentativa de aprender[cite: 1].";
   }
 }
