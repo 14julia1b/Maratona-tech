@@ -3,72 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Análise: IA na Educação</title>
+  <title>Dashboard do Passo 3: Uso de IA na Educação</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="dashboard-container">
-    <!-- Cabeçalho Principal -->
-    <header class="main-header">
-      <div>
-        <h1>Análise de Impacto: Uso de IA e Aprendizado</h1>
-        <p>Pesquisa sobre hábitos de estudo e retenção de conteúdo escolar</p>
+    <!-- 1. TEMA, PERGUNTA DE PESQUISA E HIPÓTESE INICIAL -->
+    <header class="header-card">
+      <div class="header-badge">PASSO 3 — ESTRUTURA COMPLETA</div>
+      <h1>Tema: Uso da Inteligência Artificial em Trabalhos Escolares</h1>
+      
+      <div class="research-grid">
+        <div class="info-box">
+          <h3>❓ Pergunta de Pesquisa</h3>
+          <p>O hábito de usar IA nos trabalhos escolares impacta a capacidade dos alunos de compreenderem o conteúdo pesquisado?</p>
+        </div>
+        <div class="info-box">
+          <h3>🎯 Hipótese Inicial</h3>
+          <p>Alunos que usam a IA para realizar os trabalhos escolares não compreendem perfeitamente a matéria.</p>
+        </div>
       </div>
     </header>
 
-    <!-- Cards de Indicadores (KPIs) -->
-    <section class="kpi-grid">
-      <div class="kpi-card">
-        <span class="kpi-title">Total de Alunos</span>
-        <span class="kpi-value">20</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-title">Utilizam IA</span>
-        <span class="kpi-value">90%</span>
-      </div>
-      <div class="kpi-card warning">
-        <span class="kpi-title">Domínio Total do Tema</span>
-        <span class="kpi-value">5%</span>
-      </div>
-    </section>
-
-    <!-- Filtro por Botões -->
-    <section class="filter-section">
-      <span class="filter-label">Filtrar por Perfil de Uso:</span>
+    <!-- 3. FILTRO INTERATIVO -->
+    <section class="filter-card">
+      <span class="filter-title">Filtro Interativo (Forma de Uso da IA):</span>
       <div class="filter-buttons">
-        <button class="btn-filter active" onclick="setFilter('todos', this)">Todos</button>
-        <button class="btn-filter" onclick="setFilter('copia_alteracoes', this)">Copiam c/ alterações</button>
-        <button class="btn-filter" onclick="setFilter('escrevo_proprias', this)">Reescrevem autoralmente</button>
-        <button class="btn-filter" onclick="setFilter('apenas_duvidas', this)">Apenas dúvidas</button>
-        <button class="btn-filter" onclick="setFilter('copia_sem_alteracoes', this)">Cópia direta</button>
+        <button class="btn-filter active" onclick="setFilter('todos', this)">Todos os Alunos (20)</button>
+        <button class="btn-filter" onclick="setFilter('copia_alteracoes', this)">Copiam c/ alterações (7)</button>
+        <button class="btn-filter" onclick="setFilter('escrevo_proprias', this)">Reescrevem autoralmente (7)</button>
+        <button class="btn-filter" onclick="setFilter('apenas_duvidas', this)">Apenas dúvidas (3)</button>
+        <button class="btn-filter" onclick="setFilter('copia_sem_alteracoes', this)">Cópia direta (1)</button>
       </div>
     </section>
 
-    <!-- Gráficos -->
+    <!-- 2. DOIS GRÁFICOS COMPLEMENTARES -->
     <section class="charts-grid">
       <div class="chart-card">
-        <h2>Distribuição do Uso de IA</h2>
+        <h2>Gráfico 1: Como a turma utiliza a IA?</h2>
         <div class="canvas-box">
           <canvas id="chartDonut"></canvas>
         </div>
       </div>
 
       <div class="chart-card">
-        <h2>Percepção de Compreensão</h2>
+        <h2>Gráfico 2: Nível de Compreensão Declarado</h2>
         <div class="canvas-box">
           <canvas id="chartBar"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- Painel de Conclusão / Validação -->
-    <section class="insight-box">
-      <h3>💡 Insights da Pesquisa</h3>
-      <p id="insightText">
-        Selecione um perfil de uso acima para visualizar o impacto no nível de compreensão da matéria.
-      </p>
+    <!-- 4, 5 e 6. VERIFICAÇÃO CRÍTICA, RELAÇÃO COM HIPÓTESE E CONCLUSÃO -->
+    <section class="analysis-grid">
+      <!-- 5. Relação com a Hipótese -->
+      <div class="analysis-card hypothesis">
+        <div class="card-icon">🔄</div>
+        <h3>Relação com a Hipótese</h3>
+        <p id="hypothesisText">
+          Ao acionar os filtros, é possível observar que a hipótese está <strong>parcialmente correta</strong>. O filtro de cópia (direta ou com alterações) revela que 0% desses alunos atinge o domínio "Muito bem", confirmando a hipótese para usos passivos[cite: 1]. Porém, quando filtrados os alunos que reescrevem o texto com as próprias palavras, a hipótese se reverte, surgindo o único aluno que compreendeu totalmente a matéria[cite: 1].
+        </p>
+      </div>
+
+      <!-- 4. Verificação Crítica da IA -->
+      <div class="analysis-card verification">
+        <div class="card-icon">🤖</div>
+        <h3>Verificação Crítica da IA</h3>
+        <p>
+          <strong>Concordo parcialmente com a IA.</strong> A IA sugeriu inicialmente que o uso da tecnologia reduz a retenção de aprendizado de forma geral. Porém, a evidência extraída do nosso Dashboard prova que a máquina errou ao generalizar: a perda de aprendizado não é causada pela ferramenta em si, mas sim pela <em>passividade na cópia</em> do estudante[cite: 1].
+        </p>
+      </div>
+
+      <!-- 6. Conclusão Final -->
+      <div class="analysis-card conclusion">
+        <div class="card-icon">📌</div>
+        <h3>Conclusão Final da Investigação</h3>
+        <p id="conclusionText">
+          Dos 20 alunos pesquisados, 90% utilizam IA[cite: 1]. A investigação conclui que a Inteligência Artificial não impede o aprendizado por si só, mas sim a postura passiva de copiar textos[cite: 1]. Estudantes que utilizam a IA como apoio criativo e reescrevem os conteúdos demonstram taxas elevadas e profundas de compreensão[cite: 1].
+        </p>
+      </div>
     </section>
   </div>
 

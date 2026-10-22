@@ -24,7 +24,7 @@ const studentData = [
 let donutChart, barChart;
 
 window.onload = function() {
-  // Gráfico de Rosca (Donut)
+  // Gráfico 1: Rosca
   const ctxDonut = document.getElementById('chartDonut').getContext('2d');
   donutChart = new Chart(ctxDonut, {
     type: 'doughnut',
@@ -33,26 +33,24 @@ window.onload = function() {
         'Copio c/ alterações',
         'Reescrevo autoralmente',
         'Apenas p/ dúvidas',
-        'Não utilizo',
+        'Não utilizo IA',
         'Cópia direta'
       ],
       datasets: [{
         data: [7, 7, 3, 2, 1],
-        backgroundColor: ['#4318ff', '#6ad2ff', '#ffb800', '#e0e5f2', '#ff5630'],
+        backgroundColor: ['#2563eb', '#06b6d4', '#f59e0b', '#94a3b8', '#ef4444'],
         borderWidth: 0
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom' }
-      },
-      cutout: '65%'
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+      cutout: '60%'
     }
   });
 
-  // Gráfico de Barras Horizontais
+  // Gráfico 2: Barras
   const ctxBar = document.getElementById('chartBar').getContext('2d');
   barChart = new Chart(ctxBar, {
     type: 'bar',
@@ -65,36 +63,28 @@ window.onload = function() {
         'Não se Preocupa'
       ],
       datasets: [{
-        label: 'Alunos',
+        label: 'Nº de Alunos',
         data: [1, 8, 4, 3, 2],
-        backgroundColor: '#4318ff',
-        borderRadius: 8
+        backgroundColor: '#2563eb',
+        borderRadius: 6
       }]
     },
     options: {
-      indexAxis: 'y', // Define o gráfico como horizontal
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        x: { beginAtZero: true, ticks: { stepSize: 1 } }
-      },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
       plugins: { legend: { display: false } }
     }
   });
-
-  updateAnalysis('todos');
 };
 
 function setFilter(filterValue, element) {
   document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
   element.classList.add('active');
-  updateAnalysis(filterValue);
-}
 
-function updateAnalysis(selectedFilter) {
   let filtered = studentData;
-  if (selectedFilter !== 'todos') {
-    filtered = studentData.filter(d => d.uso === selectedFilter);
+  if (filterValue !== 'todos') {
+    filtered = studentData.filter(d => d.uso === filterValue);
   }
 
   const counts = {
@@ -120,14 +110,16 @@ function updateAnalysis(selectedFilter) {
   ];
   barChart.update();
 
-  const insightElem = document.getElementById('insightText');
-  if (selectedFilter === 'todos') {
-    insightElem.innerHTML = "<b>Visão Geral:</b> Dos 20 alunos, 90% utilizam a IA de alguma forma[cite: 1]. Porém, apenas 1 aluno (5%) afirma ter compreensão total da matéria[cite: 1].";
-  } else if (selectedFilter === 'copia_alteracoes' || selectedFilter === 'copia_sem_alteracoes') {
-    insightElem.innerHTML = "<b>Resultado Chave:</b> Alunos que apenas copiam as respostas (com ou sem alterações) não atingem o nível máximo de compreensão[cite: 1]. A maioria fica retida em apenas entender partes do conteúdo[cite: 1].";
-  } else if (selectedFilter === 'escrevo_proprias') {
-    insightElem.innerHTML = "<b>Melhor Prática:</b> O grupo que usa a IA como apoio e reescreve o conteúdo com as próprias palavras é o único onde há relatos de domínio completo do assunto[cite: 1].";
+  // Atualização dinâmica dos textos de hipótese e conclusão
+  const hypElem = document.getElementById('hypothesisText');
+  
+  if (filterValue === 'todos') {
+    hypElem.innerHTML = "Ao acionar os filtros, observa-se que a hipótese está <strong>parcialmente correta</strong>. No geral, apenas 1 aluno (5%) compreende muito bem o conteúdo[cite: 1].";
+  } else if (filterValue === 'copia_alteracoes' || filterValue === 'copia_sem_alteracoes') {
+    hypElem.innerHTML = "<strong>Hipótese Confirmada para este filtro!</strong> Alunos que apenas copiam as respostas (com ou sem alterações) não atingem a compreensão 'Muito bem'[cite: 1].";
+  } else if (filterValue === 'escrevo_proprias') {
+    hypElem.innerHTML = "<strong>Hipótese Refutada para uso ativo!</strong> Ao filtrar quem reescreve com as próprias palavras, identificamos o único aluno com compreensão total do conteúdo[cite: 1].";
   } else {
-    insightElem.innerHTML = "<b>Uso Pontual:</b> O uso da IA focado em sanar dúvidas pontuais demonstra uma retenção intermediária, sem prejuízo direto à tentativa de aprender[cite: 1].";
+    hypElem.innerHTML = "<strong>Uso Pontual:</strong> Alunos que utilizam a IA apenas para sanar dúvidas apresentam retenção intermediária[cite: 1].";
   }
 }
