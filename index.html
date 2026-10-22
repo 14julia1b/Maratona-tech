@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Dashboard: Uso de IA vs. Compreensão</title>
+  <!-- Chart.js para os gráficos interativos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Ligação ao ficheiro CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="window-container">
+    <!-- Cabeçalho com o Filtro Interativo -->
+    <div class="window-header">
+      <div class="window-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="window-title">Meu Dashboard: Uso de IA vs. Compreensão</div>
+      <div class="filter-container">
+        <label for="useFilter">Filtro:</label>
+        <select id="useFilter" onchange="updateDashboard()">
+          <option value="todos">Todos os Alunos (20)</option>
+          <option value="copia_alteracoes">Copio, mas faço alterações (7)</option>
+          <option value="escrevo_proprias">Uso como base e reescrevo (7)</option>
+          <option value="apenas_duvidas">Apenas para tirar dúvidas (3)</option>
+          <option value="copia_sem_alteracoes">Copio sem alterações (1)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="dashboard-body">
+      <!-- Grid dos Gráficos -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Gráfico 1: Como a turma utiliza a IA nos trabalhos?</h3>
+          <div class="canvas-box">
+            <canvas id="chartPie"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Gráfico 2: Nível de Compreensão do Conteúdo</h3>
+          <div class="canvas-box">
+            <canvas id="chartBar"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etapas Explicativas -->
+      <div class="steps-container">
+        <div class="step-box">
+          <span class="step-number">1</span> <strong>Gráfico de Pizza:</strong> Mostra a distribuição dos hábitos de uso da Inteligência Artificial.
+        </div>
+        <div class="step-box">
+          <span class="step-number">2</span> <strong>Gráfico de Barras:</strong> Exibe a percepção de aprendizado e retenção do conteúdo.
+        </div>
+        <div class="step-box">
+          <span class="step-number">3</span> <strong>Filtro Interativo:</strong> Permite isolar um perfil de uso e ver o impacto na compreensão.
+        </div>
+      </div>
+
+      <!-- Confirmação de Hipótese -->
+      <div class="hypothesis-card">
+        <h4>⚡ Confirmação de Hipótese Realizada</h4>
+        <p id="hypothesisText">
+          Selecione uma opção no filtro no topo para analisar como a mudança na forma de uso da IA afeta o aprendizado dos estudantes.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ligação ao ficheiro JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
