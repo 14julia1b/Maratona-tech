@@ -114,12 +114,12 @@ function setFilter(filterValue, element) {
   const hypElem = document.getElementById('hypothesisText');
   
   if (filterValue === 'todos') {
-    hypElem.innerHTML = "Ao acionar os filtros, observa-se que a hipótese está <strong>parcialmente correta</strong>. No geral, apenas 1 aluno (5%) compreende muito bem o conteúdo[cite: 1].";
+    hypElem.innerHTML = "Ao acionar os filtros, observa-se que a hipótese está <strong>parcialmente correta</strong>. No geral, apenas 1 aluno (5%) compreende muito bem o conteúdo.";
   } else if (filterValue === 'copia_alteracoes' || filterValue === 'copia_sem_alteracoes') {
-    hypElem.innerHTML = "<strong>Hipótese Confirmada para este filtro!</strong> Alunos que apenas copiam as respostas (com ou sem alterações) não atingem a compreensão 'Muito bem'[cite: 1].";
+    hypElem.innerHTML = "<strong>Hipótese Confirmada para este filtro!</strong> Alunos que apenas copiam as respostas (com ou sem alterações) não atingem a compreensão 'Muito bem'.";
   } else if (filterValue === 'escrevo_proprias') {
-    hypElem.innerHTML = "<strong>Hipótese Refutada para uso ativo!</strong> Ao filtrar quem reescreve com as próprias palavras, identificamos o único aluno com compreensão total do conteúdo[cite: 1].";
+    hypElem.innerHTML = "<strong>Hipótese Refutada para uso ativo!</strong> Ao filtrar quem reescreve com as próprias palavras, identificamos o único aluno com compreensão total do conteúdo.";
   } else {
-    hypElem.innerHTML = "<strong>Uso Pontual:</strong> Alunos que utilizam a IA apenas para sanar dúvidas apresentam retenção intermediária[cite: 1].";
+    hypElem.innerHTML = "<strong>Uso Pontual:</strong> Alunos que utilizam a IA apenas para sanar dúvidas apresentam retenção intermediária.";
   }
 }
